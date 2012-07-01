@@ -1,10 +1,12 @@
 # NOISE!
 
-This is a simple library for 2d perlin & simplex noise in javascript. Its pretty fast (10M queries / sec).
+This is a simple library for 2d perlin & simplex noise in javascript. Perlin noise is [pretty](https://dl.dropbox.com/u/2494815/perlin/index.html).
+
+The library is pretty fast (10M queries / sec). But its still way slower than using a shader.
 
 The code is based on Stefan Gustavson's implementation. Do whatever you want with it, etc.
 
-I'm happy to add 3d noise functions if anyone wants to throw me a pull request.
+I'm happy to add 3d noise functions - throw me a pull request.
 
 ## How to make noise:
 
