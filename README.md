@@ -18,7 +18,7 @@ for (var x = 0; x < canvas.width; x++) {
     // noise.simplex2 and noise.perlin2 return values between -1 and 1.
     var value = noise.simplex2(x / 100, y / 100);
 
-    image[x][y].r = Math.abs(value) * 256; // Or whatever. Take a look at demo.html to see it used in a canvas.
+    image[x][y].r = Math.abs(value) * 256; // Or whatever. Open demo.html to see it used with canvas.
   }
 }
 ```
@@ -27,5 +27,5 @@ The library exposes an object called `noise` with 3 properties:
 
 - **simplex2(x, y)**: 2D Simplex noise function
 - **perlin2(x, y)**: 2D Perlin noise function
-- **seed(val)**: Seed the noise functions with the specified value. Either use a value between 0 and 1 or an integer between 1 and 65536. Only 65536 different seeds are supported.
+- **seed(val)**: Seed the noise functions. Only 65536 different seeds are supported. Use a float between 0 and 1 or an integer from 1 to 65536. 
 
