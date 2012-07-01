@@ -16,10 +16,9 @@ noise.seed(Math.random());
 for (var x = 0; x < canvas.width; x++) {
   for (var y = 0; y < canvas.height; y++) {
     // noise.simplex2 and noise.perlin2 return values between -1 and 1.
-    var value = Math.abs(noise.simplex2(x / 100, y / 100));
-    value *= 256;
+    var value = noise.simplex2(x / 100, y / 100);
 
-    image[x][y].r = value; // Or whatever. Take a look at demo.html to see how to use it in canvas.
+    image[x][y].r = Math.abs(value) * 256; // Or whatever. Take a look at demo.html to see it used in a canvas.
   }
 }
 ```
