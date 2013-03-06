@@ -17,16 +17,18 @@
 (function(global){
   var module = global.noise = {};
 
-  function Grad(x, y) {
-    this.x = x; this.y = y;
+  function Grad(x, y, z) {
+    this.x = x; this.y = y; this.z = z;
   }
   
-  Grad.prototype.dot = function(x, y) {
+  Grad.prototype.dot2 = function(x, y) {
     return this.x*x + this.y*y;
   };
 
-  // I'm leaving in the third parameter here incase I want to add 3d later. It'll be ignored
-  // by the Grad constructor.
+  Grad.prototype.dot3 = function(x, y, z) {
+    return this.x*x + this.y*y + this.z*z;
+  };
+
   var grad3 = [new Grad(1,1,0),new Grad(-1,1,0),new Grad(1,-1,0),new Grad(-1,-1,0),
                new Grad(1,0,1),new Grad(-1,0,1),new Grad(1,0,-1),new Grad(-1,0,-1),
                new Grad(0,1,1),new Grad(0,-1,1),new Grad(0,1,-1),new Grad(0,-1,-1)];
@@ -123,21 +125,21 @@
       n0 = 0;
     } else {
       t0 *= t0;
-      n0 = t0 * t0 * gi0.dot(x0, y0);  // (x,y) of grad3 used for 2D gradient
+      n0 = t0 * t0 * gi0.dot2(x0, y0);  // (x,y) of grad3 used for 2D gradient
     }
     var t1 = 0.5 - x1*x1-y1*y1;
     if(t1<0) {
       n1 = 0;
     } else {
       t1 *= t1;
-      n1 = t1 * t1 * gi1.dot(x1, y1);
+      n1 = t1 * t1 * gi1.dot2(x1, y1);
     }
     var t2 = 0.5 - x2*x2-y2*y2;
     if(t2<0) {
       n2 = 0;
     } else {
       t2 *= t2;
-      n2 = t2 * t2 * gi2.dot(x2, y2);
+      n2 = t2 * t2 * gi2.dot2(x2, y2);
     }
     // Add contributions from each corner to get the final noise value.
     // The result is scaled to return values in the interval [-1,1].
@@ -162,19 +164,53 @@
     X = X & 255; Y = Y & 255;
 
     // Calculate noise contributions from each of the four corners
-    var n00 = gradP[X+perm[Y]].dot(x, y);
-    var n01 = gradP[X+perm[Y+1]].dot(x, y-1);
-    var n10 = gradP[X+1+perm[Y]].dot(x-1, y);
-    var n11 = gradP[X+1+perm[Y+1]].dot(x-1, y-1);
+    var n00 = gradP[X+perm[Y]].dot2(x, y);
+    var n01 = gradP[X+perm[Y+1]].dot2(x, y-1);
+    var n10 = gradP[X+1+perm[Y]].dot2(x-1, y);
+    var n11 = gradP[X+1+perm[Y+1]].dot2(x-1, y-1);
 
     // Compute the fade curve value for x
     var u = fade(x);
 
     // Interpolate the four results
-    var nxy = lerp(lerp(n00, n10, u),
-                   lerp(n01, n11, u),
-                fade(y));
-    return nxy;
-  }
+    return lerp(
+        lerp(n00, n10, u),
+        lerp(n01, n11, u),
+       fade(y));
+  };
+
+  module.perlin3 = function(x, y, z) {
+    // Find unit grid cell containing point
+    var X = Math.floor(x), Y = Math.floor(y), Z = Math.floor(z);
+    // Get relative xyz coordinates of point within that cell
+    x = x - X; y = y - Y; z = z - Z;
+    // Wrap the integer cells at 255 (smaller integer period can be introduced here)
+    X = X & 255; Y = Y & 255; Z = Z & 255;
+
+    // Calculate noise contributions from each of the eight corners
+    var n000 = gradP[X+  perm[Y+  perm[Z  ]]].dot3(x,   y,     z);
+    var n001 = gradP[X+  perm[Y+  perm[Z+1]]].dot3(x,   y,   z-1);
+    var n010 = gradP[X+  perm[Y+1+perm[Z  ]]].dot3(x,   y-1,   z);
+    var n011 = gradP[X+  perm[Y+1+perm[Z+1]]].dot3(x,   y-1, z-1);
+    var n100 = gradP[X+1+perm[Y+  perm[Z  ]]].dot3(x-1,   y,   z);
+    var n101 = gradP[X+1+perm[Y+  perm[Z+1]]].dot3(x-1,   y, z-1);
+    var n110 = gradP[X+1+perm[Y+1+perm[Z  ]]].dot3(x-1, y-1,   z);
+    var n111 = gradP[X+1+perm[Y+1+perm[Z+1]]].dot3(x-1, y-1, z-1);
+
+    // Compute the fade curve value for x, y, z
+    var u = fade(x);
+    var v = fade(y);
+    var w = fade(z);
+
+    // Interpolate
+    return lerp(
+        lerp(
+          lerp(n000, n100, u),
+          lerp(n001, n101, u), w),
+        lerp(
+          lerp(n010, n110, u),
+          lerp(n011, n111, u), w),
+       v);
+  };
 
 })(this);

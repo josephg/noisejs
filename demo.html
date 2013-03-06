@@ -47,7 +47,7 @@ for (var x = 0; x < canvas.width; x++) {
   //  noise.seed(Math.random());
   //}
   for (var y = 0; y < canvas.height; y++) {
-    var value = Math.abs(noise.simplex2(x / 100, y / 100));
+    var value = Math.abs(noise.perlin2(x / 100, y / 100));
     value *= 256;
 
     var cell = (x + y * canvas.width) * 4;
