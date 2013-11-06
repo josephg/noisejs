@@ -9,6 +9,7 @@ The code is based on Stefan Gustavson's implementation. Do whatever you want wit
 ## How to make noise:
 
 ```javascript
+var noise = new Noise();
 noise.seed(Math.random());
 
 for (var x = 0; x < canvas.width; x++) {
@@ -21,11 +22,11 @@ for (var x = 0; x < canvas.width; x++) {
 }
 ```
 
-The library exposes an object called `noise` with the following properties:
+The library exposes a constructor function called `Noise` with the following instance methods:
 
 - **simplex2(x, y)**: 2D Simplex noise function
 - **simplex3(x, y, z)**: 3D Simplex noise function
 - **perlin2(x, y)**: 2D Perlin noise function
 - **perlin3(x, y, z)**: 3D Perlin noise function
-- **seed(val)**: Seed the noise functions. Only 65536 different seeds are supported. Use a float between 0 and 1 or an integer from 1 to 65536. 
+- **seed(val)**: Seed the noise functions. Only 65536 different seeds are supported. Use a float between 0 and 1 or an integer from 1 to 65536.
 
