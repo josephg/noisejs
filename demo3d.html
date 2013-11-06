@@ -44,6 +44,7 @@ var height = 0;
 setInterval(function() {
   var start = Date.now();
 
+  var noise = new Noise();
   for (var x = 0; x < canvas.width; x++) {
     for (var y = 0; y < canvas.height; y++) {
       var value = Math.abs(noise.simplex3(x / 100, y / 100, height));
