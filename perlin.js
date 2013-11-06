@@ -322,4 +322,4 @@
 
   global.Noise = Noise;
 
-})(this);
+})(typeof module === "undefined" ? this : module.exports);
