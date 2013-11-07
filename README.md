@@ -9,8 +9,8 @@ The code is based on Stefan Gustavson's implementation. Do whatever you want wit
 ## How to make noise:
 
 ```javascript
-var noise = new Noise();
-noise.seed(Math.random());
+// value passed into the constructor is used as a seed
+var noise = new Noise(Math.random());
 
 for (var x = 0; x < canvas.width; x++) {
   for (var y = 0; y < canvas.height; y++) {
