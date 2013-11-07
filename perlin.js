@@ -15,7 +15,9 @@
  */
 
 (function(global){
-  function Noise() {
+
+  // Passing in seed will seed this Noise instance
+  function Noise(seed) {
     function Grad(x, y, z) {
       this.x = x; this.y = y; this.z = z;
     }
@@ -49,7 +51,7 @@
     this.perm = new Array(512);
     this.gradP = new Array(512);
 
-    this.seed(0);
+    this.seed(seed || 0);
   }
 
   // This isn't a very good seeding function, but it works ok. It supports 2^16
