@@ -41,17 +41,26 @@ var image = ctx.createImageData(canvas.width, canvas.height);
 var data = image.data;
 
 var height = 0;
+
+var fn = 'simplex'
 setInterval(function() {
   var start = Date.now();
 
+  var max = -Infinity, min = Infinity;
+  var noisefn = fn === 'simplex' ? noise.simplex3 : noise.perlin3;
+
   for (var x = 0; x < canvas.width; x++) {
     for (var y = 0; y < canvas.height; y++) {
-      var value = Math.abs(noise.simplex3(x / 100, y / 100, height));
-      value *= 256;
+      var value = noisefn(x / 50, y / 50, height);
+
+      if (max < value) max = value;
+      if (min > value) min = value;
+
+      value = (1 + value) * 1.1 * 128;
 
       var cell = (x + y * canvas.width) * 4;
       data[cell] = data[cell + 1] = data[cell + 2] = value;
-      data[cell] += Math.max(0, (25 - value) * 8);
+      //data[cell] += Math.max(0, (25 - value) * 8);
       data[cell + 3] = 255; // alpha.
     }
   }
@@ -64,12 +73,17 @@ setInterval(function() {
 
   ctx.font = '16px sans-serif'
   ctx.textAlign = 'center';
-  ctx.fillText('Rendered in ' + (end - start) + ' ms', canvas.width / 2, canvas.height - 20);
+  ctx.fillText(fn + ' rendered in ' + (end - start) + ' ms', canvas.width / 2, canvas.height - 20);
 
   if(console) {
-    console.log('Rendered in ' + (end - start) + ' ms');
+    console.log(fn + ' rendered in ' + (end - start) + ' ms', 'range: ' + min + ' to ' + max);
   }
 
   height += 0.05;
 }, 1000/30);
+
+document.onclick = function() {
+  // Swap noise function on click.
+  fn = fn === 'simplex' ? 'perlin' : 'simplex';
+};
 </script>

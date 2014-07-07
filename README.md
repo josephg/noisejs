@@ -1,10 +1,15 @@
 # NOISE!
 
-This is a simple library for 2d & 3d perlin noise and simplex noise in javascript. Noise is [pretty](https://dl.dropbox.com/u/2494815/perlin/index.html).
+This is a simple library for 2d & 3d perlin noise and simplex noise in
+javascript. Noise is
+[pretty](https://dl.dropbox.com/u/2494815/perlin/index.html).
 
-The library is pretty fast (10M queries / sec). But its still way slower than using a shader. For example, if you try and update an entire screen's worth of pixels, it'll be [slow](http://josephg.github.com/noisejs/demo3d.html).
+The library is pretty fast (10M queries / sec). But its still way slower than
+using a shader. For example, if you try and update an entire screen's worth of
+pixels, it'll be [slow](http://josephg.github.com/noisejs/demo3d.html).
 
-The code is based on Stefan Gustavson's implementation. Do whatever you want with it, etc.
+The code is based on Stefan Gustavson's implementation. Do whatever you want
+with it, etc.
 
 ## How to make noise:
 
@@ -13,8 +18,12 @@ noise.seed(Math.random());
 
 for (var x = 0; x < canvas.width; x++) {
   for (var y = 0; y < canvas.height; y++) {
-    // noise.simplex2 and noise.perlin2 return values between -1 and 1.
+    // All noise functions return values in the range of -1 to 1.
+
+    // noise.simplex2 and noise.perlin2 for 2d noise
     var value = noise.simplex2(x / 100, y / 100);
+    // ... or noise.simplex3 and noise.perlin3:
+    var value = noise.simplex3(x / 100, y / 100, time);
 
     image[x][y].r = Math.abs(value) * 256; // Or whatever. Open demo.html to see it used with canvas.
   }
