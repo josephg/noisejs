@@ -203,28 +203,28 @@
     var gi3 = gradP[i+ 1+perm[j+ 1+perm[k+ 1]]];
 
     // Calculate the contribution from the four corners
-    var t0 = 0.5 - x0*x0-y0*y0-z0*z0;
+    var t0 = 0.6 - x0*x0 - y0*y0 - z0*z0;
     if(t0<0) {
       n0 = 0;
     } else {
       t0 *= t0;
       n0 = t0 * t0 * gi0.dot3(x0, y0, z0);  // (x,y) of grad3 used for 2D gradient
     }
-    var t1 = 0.5 - x1*x1-y1*y1-z1*z1;
+    var t1 = 0.6 - x1*x1 - y1*y1 - z1*z1;
     if(t1<0) {
       n1 = 0;
     } else {
       t1 *= t1;
       n1 = t1 * t1 * gi1.dot3(x1, y1, z1);
     }
-    var t2 = 0.5 - x2*x2-y2*y2-z2*z2;
+    var t2 = 0.6 - x2*x2 - y2*y2 - z2*z2;
     if(t2<0) {
       n2 = 0;
     } else {
       t2 *= t2;
       n2 = t2 * t2 * gi2.dot3(x2, y2, z2);
     }
-    var t3 = 0.5 - x3*x3-y3*y3-z3*z3;
+    var t3 = 0.6 - x3*x3 - y3*y3 - z3*z3;
     if(t3<0) {
       n3 = 0;
     } else {
