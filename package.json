@@ -1,0 +1,24 @@
+{
+  "name": "noisejs",
+  "version": "1.0.0",
+  "description": "This is a simple library for 2d & 3d perlin noise and simplex noise in javascript. Noise is pretty.",
+  "main": "perlin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/josephg/noisejs.git"
+  },
+  "keywords": [
+    "noise",
+    "perlin",
+    "simplex"
+  ],
+  "author": "josephg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josephg/noisejs/issues"
+  },
+  "homepage": "https://github.com/josephg/noisejs"
+}
