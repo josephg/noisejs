@@ -2,7 +2,7 @@
 
 This is a simple library for 2d & 3d perlin noise and simplex noise in
 javascript. Noise is
-[pretty](https://dl.dropbox.com/u/2494815/perlin/index.html).
+[pretty](https://josephg.com/perlin/3/).
 
 The library is pretty fast (10M queries / sec). But its still way slower than
 using a shader. For example, if you try and update an entire screen's worth of
