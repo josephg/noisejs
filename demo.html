@@ -31,6 +31,8 @@ body {
 <div class='centerbox'><canvas></canvas></div>
 <script src='perlin.js'></script>
 <script>
+var noise = Noise(Math.random());
+
 var canvas = document.getElementsByTagName('canvas')[0];
 canvas.width = 1024;
 canvas.height = 768;

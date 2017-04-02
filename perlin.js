@@ -14,8 +14,10 @@
  *
  */
 
-(function(global){
-  var module = global.noise = {};
+this.Noise = function(seed){
+  seed = seed || 0;
+
+  var module = {};
 
   function Grad(x, y, z) {
     this.x = x; this.y = y; this.z = z;
@@ -76,7 +78,7 @@
     }
   };
 
-  module.seed(0);
+  module.seed(seed);
 
   /*
   for(var i=0; i<256; i++) {
@@ -307,4 +309,6 @@
        v);
   };
 
-})(this);
+  return module;
+
+};
