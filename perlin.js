@@ -14,8 +14,13 @@
  *
  */
 
-(function(global){
-  var module = global.noise = {};
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+    typeof define === 'function' && define.amd ? define(factory) :
+    (global.noise = factory());
+}(this, (function () { 'use strict';
+
+  var module = {};
 
   function Grad(x, y, z) {
     this.x = x; this.y = y; this.z = z;
@@ -307,4 +312,6 @@
        v);
   };
 
-})(this);
+  return module;
+
+})));
