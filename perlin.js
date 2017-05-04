@@ -14,11 +14,17 @@
  *
  */
 
-(function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global.noise = factory());
-}(this, (function () { 'use strict';
+(function(global, factory) {
+
+  if(typeof exports === 'object') {
+    module.exports = factory(global);
+  } else if(typeof define === 'function' && define.amd) {
+    define(function() { return factory(global); });
+  } else {
+    global.noise = factory(global);
+  }
+
+}(typeof window !== 'undefined' ? window : this, function(global) { 'use strict';
 
   var module = {};
 
@@ -314,4 +320,4 @@
 
   return module;
 
-})));
+}));
