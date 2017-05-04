@@ -14,8 +14,19 @@
  *
  */
 
-(function(global){
-  var module = global.noise = {};
+(function(global, factory) {
+
+  if(typeof exports === 'object') {
+    module.exports = factory(global);
+  } else if(typeof define === 'function' && define.amd) {
+    define(function() { return factory(global); });
+  } else {
+    global.noise = factory(global);
+  }
+
+}(typeof window !== 'undefined' ? window : this, function(global) { 'use strict';
+
+  var module = {};
 
   function Grad(x, y, z) {
     this.x = x; this.y = y; this.z = z;
@@ -307,4 +318,6 @@
        v);
   };
 
-})(this);
+  return module;
+
+}));
