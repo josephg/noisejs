@@ -1,8 +1,9 @@
 # NOISE!
 
-This is a simple library for 2d & 3d perlin noise and simplex noise in
+This is a simple library for 1d & 2d & 3d perlin noise and simplex noise in
 javascript. Noise is
 [pretty](https://josephg.com/perlin/3/).
+
 
 The library is pretty fast (10M queries / sec). But its still way slower than
 using a shader. For example, if you try and update an entire screen's worth of
@@ -31,9 +32,10 @@ for (var x = 0; x < canvas.width; x++) {
 ```
 
 The library exposes an object called `noise` with the following properties:
-
+- **simplex1(x)**: 1D Simplex noise function
 - **simplex2(x, y)**: 2D Simplex noise function
 - **simplex3(x, y, z)**: 3D Simplex noise function
+- **perlin1(x)**: 1D Perlin noise function
 - **perlin2(x, y)**: 2D Perlin noise function
 - **perlin3(x, y, z)**: 3D Perlin noise function
 - **seed(val)**: Seed the noise functions. Only 65536 different seeds are supported. Use a float between 0 and 1 or an integer from 1 to 65536. 
