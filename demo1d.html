@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Noise js</title>
+	<style type="text/css">
+		
+body{
+	margin: 0px;
+	overflow: hidden;
+	image-rendering: pixelated
+}
+
+	</style>
+</head>
+<body>
+	<script src="perlin.js"></script>
+	<canvas id="can"></canvas>
+	<script type="text/javascript">
+		
+const c = document.getElementById("can")
+const ctx = c.getContext("2d")
+
+c.width = window.innerWidth
+c.height = window.innerHeight
+
+ctx.fillStyle = "skyblue"
+ctx.fillRect(0, 0, window.innerWidth, window.innerHeight)
+
+ctx.strokeStyle = "darkgreen"
+
+noise.seed(Math.random())
+for(let i=0; i<10000; i++){
+	ctx.beginPath()
+	ctx.moveTo(i, window.innerHeight)
+	ctx.lineTo(i, window.innerHeight/2 + noise.simplex1(i/200)*100)
+	ctx.stroke()
+}
+
+
+
+	</script>
+</body>
+</html>

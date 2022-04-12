@@ -237,6 +237,11 @@
 
   };
 
+  //1D simplex noise
+  module.simplex1 = (xin)=>{
+    return module.simplex2(xin, 0)
+  }
+
   // ##### Perlin noise stuff
 
   function fade(t) {
@@ -306,5 +311,10 @@
           lerp(n011, n111, u), w),
        v);
   };
+
+  //1d perlin noise
+  module.perlin1 = (x)=>{
+    return module.perlin2(x, 0)
+  }
 
 })(this);
