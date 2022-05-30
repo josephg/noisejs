@@ -7,7 +7,7 @@
  * Converted to Javascript by Joseph Gentle.
  * Added local seed and 65536 times more possibilities, and added 1D noise by Stratton Jelley (stratjel@gmail.com).
  *
- * Version 2022-04-10
+ * Version 2022-05-30
  *
  * This code was placed in the public domain by its original author,
  * Stefan Gustavson. You may use it as you see fit, but
