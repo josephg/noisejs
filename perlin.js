@@ -76,8 +76,8 @@ function noise(seed) {
   this.grad3 = [new Grad(1,1,0),new Grad(-1,1,0),new Grad(1,-1,0),new Grad(-1,-1,0),
     new Grad(1,0,1),new Grad(-1,0,1),new Grad(1,0,-1),new Grad(-1,0,-1),
     new Grad(0,1,1),new Grad(0,-1,1),new Grad(0,1,-1),new Grad(0,-1,-1)];
-  this.perm = new Array(512);
-  this.gradP = new Array(512);
+  this.perm = new Array(2048);
+  this.gradP = new Array(2048);
   
   // To remove the need for index wrapping, double the permutation table length
   
